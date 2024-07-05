@@ -1,0 +1,81 @@
+{% extends 'fitness/layout.html' %}
+{% load static %}
+
+{% block content %}
+<!-- Enlace al archivo CSS -->
+<link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+<div class="container form-container">
+    <form id="login">
+        <div class="row">
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Email address</label>
+                    <input type="email" class="form-control custom-width" id="exampleInputEmail1" aria-describedby="emailHelp">
+                </div>
+            </div>
+            <div class="col">
+                <div class="mb-3">
+                    <label for="exampleInputPassword1" class="form-label">Password</label>
+                    <input type="password" class="form-control custom-width" id="exampleInputPassword1">
+                </div>
+            </div>
+        </div>
+        <button type="button" onclick="window.location.href = 'index'" class="btn btn-secondary">Volver</button>
+        <button type="button" class="btn btn-primary" id="btnEnviar">Enviar</button>
+    </form>
+
+    <!-- Modal -->
+    <div class="modal fade" id="miModal" tabindex="-1" aria-labelledby="miModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="miModalLabel">Éxito</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Datos enviados con éxito.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Scripts -->
+<script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-xrRq20dAvC7Wm2kKjO6zvENLR8JztFe1LR73K7eQbNWVFaict0sODFcuZfuW0h7W" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<script>
+$(document).ready(function() {
+    $('#btnEnviar').click(function() {
+        var exampleInputEmail1 = $('#exampleInputEmail1').val();
+        var exampleInputPassword1 = $('#exampleInputPassword1').val();
+        
+        if (exampleInputEmail1 === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Atención!',
+                text: 'Por favor, ingresa tu email.',
+            });
+            return;
+        }
+        
+        if (exampleInputPassword1 === '') {
+            Swal.fire({
+                icon: 'warning',
+                title: '¡Atención!',
+                text: 'Por favor, ingresa tu contraseña.',
+            });
+            return;
+        }
+
+        // Muestra el modal al pasar la validación
+        $('#miModal').modal('show');
+    });
+});
+</script>
+{% endblock %}
