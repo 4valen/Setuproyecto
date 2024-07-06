@@ -52,11 +52,10 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'erestuproyecto.urls'
-
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': [os.path.join(BASE_DIR, 'fitness', 'templates')],  # Asegúrate de que esta ruta sea correcta
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

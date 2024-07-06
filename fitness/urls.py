@@ -13,7 +13,7 @@ urlpatterns = [
     path('lista',views.lista, name='lista'),
     path('lista/<str:pk>/<str:action>/', views.lista, name='lista_action'),
     path('generacion/', generacion_view, name='generacion'),
-    path('vida_saludable_form/', views.vida_saludable_form, name='vida_saludable_form')
-    path('vida_saludable/', views.vida_saludable_view, name='vida_saludable_view'),
+    path('vida_saludable_form/', views.vida_saludable_form, name='vida_saludable_form'),
+   
     path('success/', views.success_view, name='success'),  
     ]

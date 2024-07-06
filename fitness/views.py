@@ -67,17 +67,17 @@ def lista(request):
     context = {"Datos":v}
     return render(request, 'fitness/lista.html', context) """
 def vida_saludable_form(request):
-    return render(request, 'vida_saludable_form.html')
-
-def vida_saludable_view(request):
     if request.method == 'POST':
         form = VidaSaludableForm(request.POST)
         if form.is_valid():
-            form.save()
-            return redirect('success')  # Redirige a una página de éxito
+            # Guardar el formulario solo si es válido y contiene todos los datos necesarios
+            instance = form.save(commit=False)
+            instance.fecha_nacimiento = request.POST.get('fecha_nacimiento')  # Asegúrate de obtener la fecha de nacimiento de los datos del formulario
+            instance.save()
+            return redirect('success')  # Redirige a alguna página de éxito o donde sea necesario
     else:
         form = VidaSaludableForm()
-    return render(request, 'vida_saludable_form.html', {'form': form})
+    return render(request, 'fitness/vida_saludable_form.html', {'form': form})
 
 
 def success_view(request):
