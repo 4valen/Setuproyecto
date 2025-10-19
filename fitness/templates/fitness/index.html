@@ -1,0 +1,263 @@
+{% extends 'fitness/layout.html' %}
+{% load static %}
+<link rel="stylesheet" href="{% static 'fitness/static/fitness/estilo.css' %}">
+{% block title %} INICIO - Transforma tu cuerpo y tu vida {% endblock %}
+  
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section bg-gradient-primary py-5">
+    <div class="container">
+        <div class="row align-items-center">
+            <div class="col-lg-6 mb-4 mb-lg-0">
+                <h1 class="display-4 fw-bold text-white mb-3">
+                    {% if request.user.is_authenticated %}
+                        Bienvenid@, <span class="text-capitalize">{{ nombre_completo }}</span>
+                    {% else %}
+                        Transforma tu cuerpo, transforma tu vida
+                    {% endif %}
+                </h1>
+                {% if not request.user.is_authenticated %}
+                <p class="lead text-light mb-4">Únete a miles de personas que ya han logrado sus objetivos de fitness con nuestro programa personalizado.</p>
+                <div class="d-flex flex-column flex-sm-row gap-3">
+                    <a href="{% url 'Registro' %}" class="btn btn-light btn-lg px-4 py-2 fw-bold">
+                        Comienza tu transformación
+                    </a>
+                    <a href="#beneficios" class="btn btn-outline-light btn-lg px-4 py-2">
+                        Conoce más
+                    </a>
+                </div>
+                {% else %}
+                <p class="lead text-light mb-4">Continúa tu viaje hacia una vida más saludable.</p>
+                <div class="d-flex gap-3">
+                    <!-- <a href="{% url 'dashboard' %}" class="btn btn-light btn-lg px-4 py-2">
+                        Ir a mi dashboard
+                    </a> -->
+                    <a href="{% url 'logout' %}" class="btn btn-outline-light btn-lg px-4">
+                        Cerrar Sesión
+                    </a>
+                </div>
+                {% endif %}
+            </div>
+            <div class="col-lg-6">
+                <div class="hero-image position-relative">
+                    <img src="{% static 'fitness/img/hero-image.jpg' %}" alt="Persona feliz y saludable" class="img-fluid rounded shadow-lg">
+                    <div class="position-absolute top-0 start-0 w-100 h-100 bg-primary opacity-10 rounded"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Beneficios Section -->
+<section id="beneficios" class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-5 fw-bold text-primary mb-3">¿Por qué elegirnos?</h2>
+                <p class="lead text-muted">Ofrecemos un enfoque integral para tu transformación física</p>
+            </div>
+        </div>
+        <div class="row g-4">
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-dumbbell fa-2x"></i>
+                        </div>
+                        <h4 class="card-title fw-bold">Entrenamiento personalizado</h4>
+                        <p class="card-text">Rutinas adaptadas a tus objetivos, nivel y disponibilidad.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-utensils fa-2x"></i>
+                        </div>
+                        <h4 class="card-title fw-bold">Plan nutricional</h4>
+                        <p class="card-text">Guías alimenticias diseñadas para maximizar tus resultados.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card h-100 border-0 shadow-sm">
+                    <div class="card-body text-center p-4">
+                        <div class="icon-wrapper bg-primary text-white rounded-circle mx-auto mb-3 d-flex align-items-center justify-content-center" style="width: 70px; height: 70px;">
+                            <i class="fas fa-chart-line fa-2x"></i>
+                        </div>
+                        <h4 class="card-title fw-bold">Seguimiento de progreso</h4>
+                        <p class="card-text">Monitorea tus avances y ajusta tu plan según resultados.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- Testimonios Section (Carrusel mejorado) -->
+<section class="py-5 bg-white">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-5 fw-bold text-primary mb-3">Historias de éxito</h2>
+                <p class="lead text-muted">Descubre cómo nuestros miembros han transformado sus vidas</p>
+            </div>
+        </div>
+        
+        <div id="testimoniosCarousel" class="carousel slide" data-bs-ride="carousel">
+            <div class="carousel-indicators">
+                <button type="button" data-bs-target="#testimoniosCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                <button type="button" data-bs-target="#testimoniosCarousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                <button type="button" data-bs-target="#testimoniosCarousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+            </div>
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card p-4 p-md-5 rounded shadow-sm bg-light text-center">
+                                <div class="testimonial-img mb-4 mx-auto rounded-circle overflow-hidden" style="width: 120px; height: 120px;">
+                                    <img src="{% static 'fitness/img/imagechico.jpg' %}" class="w-100 h-100 object-fit-cover" alt="Testimonio 1">
+                                </div>
+                                <h4 class="fw-bold text-primary mb-3">Carlos perdió 15kg en 3 meses</h4>
+                                <p class="lead fst-italic mb-4">"Nunca pensé que podría lograr estos resultados. El programa me dio la estructura y motivación que necesitaba. ¡Ahora tengo más energía que nunca!"</p>
+                                <div class="stars text-warning mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-muted">- Carlos, 32 años</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card p-4 p-md-5 rounded shadow-sm bg-light text-center">
+                                <div class="testimonial-img mb-4 mx-auto rounded-circle overflow-hidden" style="width: 120px; height: 120px;">
+                                    <img src="{% static 'fitness/img/rubia.jpg' %}" class="w-100 h-100 object-fit-cover" alt="Testimonio 2">
+                                </div>
+                                <h4 class="fw-bold text-primary mb-3">Ana ganó confianza y fuerza</h4>
+                                <p class="lead fst-italic mb-4">"Más que perder peso, gané confianza en mí misma. Los entrenamientos son desafiantes pero adaptables, y la comunidad es increíblemente solidaria."</p>
+                                <div class="stars text-warning mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                </div>
+                                <p class="text-muted">- Ana, 28 años</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <div class="row justify-content-center">
+                        <div class="col-lg-8">
+                            <div class="testimonial-card p-4 p-md-5 rounded shadow-sm bg-light text-center">
+                                <div class="testimonial-img mb-4 mx-auto rounded-circle overflow-hidden" style="width: 120px; height: 120px;">
+                                    <img src="{% static 'fitness/img/imagenchina.jpg' %}" class="w-100 h-100 object-fit-cover" alt="Testimonio 3">
+                                </div>
+                                <h4 class="fw-bold text-primary mb-3">Li mejoró su salud integral</h4>
+                                <p class="lead fst-italic mb-4">"El enfoque holístico del programa me ayudó no solo físicamente, sino también mentalmente. Aprendí hábitos que mantendré de por vida."</p>
+                                <div class="stars text-warning mb-3">
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star"></i>
+                                    <i class="fas fa-star-half-alt"></i>
+                                </div>
+                                <p class="text-muted">- Li, 35 años</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <button class="carousel-control-prev" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="prev">
+                <span class="carousel-control-prev-icon bg-primary rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
+            </button>
+            <button class="carousel-control-next" type="button" data-bs-target="#testimoniosCarousel" data-bs-slide="next">
+                <span class="carousel-control-next-icon bg-primary rounded-circle" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
+            </button>
+        </div>
+    </div>
+</section>
+
+<!-- CTA Section -->
+{% if not request.user.is_authenticated %}
+<section class="py-5 bg-primary text-white">
+    <div class="container">
+        <div class="row justify-content-center text-center">
+            <div class="col-lg-8">
+                <h2 class="display-5 fw-bold mb-4">¿Listo para comenzar tu transformación?</h2>
+                <p class="lead mb-4">Regístrate hoy y obtén tu plan personalizado completamente gratis</p>
+                <a href="{% url 'Registro' %}" class="btn btn-light btn-lg px-5 py-3 fw-bold fs-4">
+                    Comienza ahora - Es gratis
+                </a>
+                <p class="mt-3 small">Sin compromisos, cancela cuando quieras</p>
+            </div>
+        </div>
+    </div>
+</section>
+{% endif %}
+
+<!-- FAQ Section -->
+<section class="py-5 bg-light">
+    <div class="container">
+        <div class="row text-center mb-5">
+            <div class="col">
+                <h2 class="display-5 fw-bold text-primary mb-3">Preguntas frecuentes</h2>
+            </div>
+        </div>
+        <div class="row justify-content-center">
+            <div class="col-lg-8">
+                <div class="accordion" id="faqAccordion">
+                    <div class="accordion-item border-0 mb-3 shadow-sm">
+                        <h2 class="accordion-header" id="headingOne">
+                            <button class="accordion-button collapsed fw-bold text-dark bg-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+                                ¿Necesito equipo especial para comenzar?
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                No, nuestros programas están diseñados para realizarse con equipo mínimo. Muchos ejercicios pueden hacerse con peso corporal o elementos domésticos comunes.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3 shadow-sm">
+                        <h2 class="accordion-header" id="headingTwo">
+                            <button class="accordion-button collapsed fw-bold text-dark bg-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                ¿Cuánto tiempo debo dedicar al programa?
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Recomendamos entre 3-5 sesiones por semana de 30-45 minutos cada una, pero el programa es adaptable a tu disponibilidad.
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-0 mb-3 shadow-sm">
+                        <h2 class="accordion-header" id="headingThree">
+                            <button class="accordion-button collapsed fw-bold text-dark bg-white rounded" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                                ¿Es adecuado para principiantes?
+                            </button>
+                        </h2>
+                        <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                            <div class="accordion-body">
+                                Absolutamente. Nuestro programa está diseñado para todos los niveles, con modificaciones para cada ejercicio y un progreso gradual.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
